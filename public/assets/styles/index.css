@@ -1,0 +1,5 @@
+@import 'reset.css';
+
+#root,
+#wrap,
+#contents { overflow: hidden; height: 100%; }

@@ -1,0 +1,129 @@
+@mixin bouncing($origin-dir) {
+  @if $origin-dir == 'left' {
+    transform-origin: left bottom;
+  }
+  @if $origin-dir == 'right' {
+    transform-origin: right bottom;
+  }
+
+  transform: scale(0);
+  animation: bounce 500ms linear both;
+}
+
+.chatBox {
+  display: flex; flex-direction: column; overflow: hidden; position: relative; z-index: 2; min-width: 375px; max-width: 375px; height: 100%; max-height: 100vh; margin: 0 0 0 20px; background: #000; border-radius: 12px;
+
+  .title {
+    color: #fff; padding: 20px 0; line-height: 1.4;
+
+    span {
+      display: inline-block; margin: 0 2px; padding: 0 12px; cursor: pointer;
+    }
+  }
+
+  .messageList {
+    display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; scroll-behavior: smooth; height: calc(100% - 24px); background: rgba(255, 255, 255, 0.1); font-size: 16px; width: 100%;
+
+    .message {
+      display: inline-block;  position: relative; padding: 8px 12px; border-radius: 4px; font-size: 12px; white-space: pre-wrap;
+
+      .txt {
+        display: inline-block; width: auto; padding: 8px 12px; color: inherit; text-align: inherit; line-height: 1.5;
+      }
+
+      &.res { @include bouncing('left'); text-align: left;
+        &::before {
+          content:''; display: block; position: absolute; left: 12px; top: 20px; width: 30px; height: 30px; border: 2px solid rgba(255, 255, 255, 0.24); border-radius: 50%; background: url('/assets/images/gayounge.png') no-repeat center / cover;
+        }
+
+        .txt {
+          position: relative; margin: 0 0 0 40px; color: #fff; text-align: left;  background: rgba(192, 62, 142, 0.788); border-radius: 10px 10px 10px 0;
+
+          &::before {
+            content: ''; display: block; position: absolute; left: 0; bottom: -6px; border-top: 6px solid rgba(192, 62, 142, 0.788); border-right: 7px solid transparent;
+          }
+        }
+      }
+
+      &.send { @include bouncing('right'); text-align: right;
+        .txt {
+          position: relative; color: #fff; text-align: right; background: linear-gradient(120deg, #248A52, #257287); border-radius: 10px 10px 0 10px;
+
+          &::before {
+            content: ''; position: absolute; right: 0; bottom: -4px; border-right: none; border-left: 5px solid transparent; border-top: 4px solid #257287;
+          }
+        }
+      }
+    }
+  }
+
+  .ctrl {
+    display: flex; width: 100%; padding: 10px 12px; background: #000;
+
+    .textarea {
+      overflow: hidden; width: calc(100% - 14px); margin: 0 12px 0 0; border-radius: 12px;
+
+      textarea {
+        display: flex; align-items: center; overflow-y: scroll; padding: 4px 12px; border: 0; background: #fff; height: 24px; flex-basis: auto; width: calc(100% + 14px); color: #000; line-height: 16px; resize: none; outline: 0; -webkit-appearance: none;
+
+        &:focus::placeholder {
+          color: transparent;
+        }
+      }
+
+    }
+
+    button { width: 62px; border: 1px solid transparent; background: #248A52; border-radius: 16px; color: #fff; font-size: 12px; font-weight: bold; cursor: pointer; }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  4.7% {
+    transform: matrix3d(0.45, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  9.41% {
+    transform: matrix3d(0.883, 0, 0, 0, 0, 0.883, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  14.11% {
+    transform: matrix3d(1.141, 0, 0, 0, 0, 1.141, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  18.72% {
+    transform: matrix3d(1.212, 0, 0, 0, 0, 1.212, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  24.32% {
+    transform: matrix3d(1.151, 0, 0, 0, 0, 1.151, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  29.93% {
+    transform: matrix3d(1.048, 0, 0, 0, 0, 1.048, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  35.54% {
+    transform: matrix3d(0.979, 0, 0, 0, 0, 0.979, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  41.04% {
+    transform: matrix3d(0.961, 0, 0, 0, 0, 0.961, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  52.15% {
+    transform: matrix3d(0.991, 0, 0, 0, 0, 0.991, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  63.26% {
+    transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  85.49% {
+    transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+  100% {
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  }
+}
+
+@keyframes ball {
+  from {
+    transform: translateY(0) scaleY(.8);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
