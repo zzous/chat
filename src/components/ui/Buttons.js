@@ -6,10 +6,10 @@ const Buttons = props => {
 
   switch (props.type) {
     case 'link':
-      buttonElement = <a { ...props }>{props.children}</a>;
+      buttonElement = <a {...props}>{props.children}</a>;
       break;
     case 'button':
-      buttonElement = <button { ...props }>{props.children}</button>;
+      buttonElement = <button {...props}>{props.children}</button>;
       break;
     default:
       return null;

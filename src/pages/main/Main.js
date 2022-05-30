@@ -16,7 +16,7 @@ function Main() {
     <div className="main">
       {(isLogStatus && <Log logType={isLogType} />)}
       <Chat />
-      <div className='filterBox'></div>
+      {/* <div className='filterBox'></div> */}
     </div>
   );
 }

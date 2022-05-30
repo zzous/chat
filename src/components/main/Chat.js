@@ -1,4 +1,5 @@
 import './Chat.scoped.scss';
+import { IoMdSend } from 'react-icons/io';
 
 import {
   logStatus,
@@ -152,7 +153,7 @@ function Chat() {
           <div className='textarea'>
             <textarea ref={textareaRef} onKeyDown={_.debounce(ctrlTextareaKeyDown, 10)} placeholder="Type message..." />
           </div>
-          <button onClick={ctrlSendButton}>Send</button>
+          <button onClick={ctrlSendButton}><IoMdSend /></button>
         </div>
       </div>
     </>
