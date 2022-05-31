@@ -1,6 +1,3 @@
-// Style
-import './Buttons.scss';
-
 const Buttons = props => {
   let buttonElement;
 

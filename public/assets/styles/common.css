@@ -1,0 +1,16 @@
+.navLink,
+.link { display: inline-block; margin: 0 12px; color: #7bcc46; font-size: 18px; }
+.navLink.active,
+.link.active { color: #7bcc46; text-shadow: 0 0 0 #7bcc46; }
+
+button[type=button] { border: 0; background: transparent; font-size: 18px; }
+button[type=button]:disabled { color: #ccc; cursor: not-allowed; }
+button[type=button].success { color: #7bcc46; }
+button[type=button].danger { color: #ca1a1a; }
+
+.spinner { display: block; position: absolute; left: 0; top: 0; z-index: 1; padding: 20px; }
+.spinner > div { position: relative; top: -10px; width: 8px; height: 8px; border-radius: 5px; background-color: #fff; color: #fff; transform-origin: 5px 15px; animation: spin 2s infinite linear; }
+.spinner > div:before,
+.spinner > div:after { content: ''; display: inline-block; position: absolute; }
+.spinner > div:before { left: -8.66254px; top: 15px; width: 8px; height: 8px; border-radius: 5px; background-color: #fff; color: #fff; }
+.spinner > div:after { left: 8.66254px; top: 15px; width: 8px; height: 8px; border-radius: 5px; background-color: #fff; color: #fff; }

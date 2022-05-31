@@ -1,5 +1,6 @@
-import './Chat.scoped.scss';
+// import './Chat.scoped.scss';
 import { IoMdSend } from 'react-icons/io';
+import { VscAccount } from 'react-icons/vsc';
 
 import {
   logStatus,
@@ -136,7 +137,9 @@ function Chat() {
     <>
       <div className="chatBox">
         <div className='title'>
-          <span>안녕 - 수고 - 로그(토글)</span>
+          <h1>TA Bot <span>안녕 - 수고 - 로그(토글)</span></h1>
+
+          <span className='user'><VscAccount /></span>
         </div>
 
         <ul className="messageList" ref={messageListRef}>

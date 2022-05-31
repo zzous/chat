@@ -1,5 +1,3 @@
-import './Main.scss';
-
 import {
   logStatus,
   logType
@@ -17,6 +15,7 @@ function Main() {
       {(isLogStatus && <Log logType={isLogType} />)}
       <Chat />
       {/* <div className='filterBox'></div> */}
+
     </div>
   );
 }

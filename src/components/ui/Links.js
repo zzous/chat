@@ -1,9 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 
-import './Links.scss';
-
 const Links = props => {
-  const { isNavLink, to, exact, children, onClick} = props;
+  const { isNavLink, to, exact, children, onClick } = props;
 
   return (
     <>

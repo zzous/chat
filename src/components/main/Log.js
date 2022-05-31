@@ -1,4 +1,3 @@
-import './Log.scss';
 import React from 'react';
 import { WebSocket, Server } from 'mock-socket';
 import mockLog from '@/mock/log';

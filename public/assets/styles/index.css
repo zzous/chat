@@ -1,4 +1,9 @@
 @import 'reset.css';
+@import 'common.css';
+@import 'chat.css';
+@import 'log.css';
+@import 'main.css';
+@import 'modal.css';
 
 #root,
 #wrap,

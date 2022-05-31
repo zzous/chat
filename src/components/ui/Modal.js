@@ -1,5 +1,3 @@
-import './Modal.scss';
-
 import React from 'react';
 import Portal from '@/components/hoc/Portal';
 
