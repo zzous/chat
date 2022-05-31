@@ -20,7 +20,7 @@
 .chatBox .ctrl .textarea textarea { display: flex; align-items: center; overflow-y: scroll; padding: 4px 12px; border: 0; background: #fff; height: 24px; flex-basis: auto; width: calc(100% + 17px); color: #000; line-height: 16px; resize: none; outline: 0; -webkit-appearance: none; }
 .chatBox .ctrl .textarea textarea:focus::placeholder { color: transparent; }
 .chatBox .ctrl button { position: absolute; top: 50%; right: 10px; width: 30px; height: 30px; margin: -15px 0 0; padding: 0 0 0 3px; color: #ddd; font-size: 20px; text-align: center; vertical-align: middle; font-weight: bold; border: 1px solid transparent; border-radius: 50%; cursor: pointer; background: #fff; transition-duration: 0.2s; }
-.chatBox .ctrl button svg { vertical-align: -3px; }
+.chatBox .ctrl button svg { vertical-align: -2px; }
 .chatBox .ctrl button:hover { color: #fff; background: #387dcd; }
 @keyframes bounce-data {
   0% { transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }

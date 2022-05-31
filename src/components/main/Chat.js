@@ -1,17 +1,22 @@
-// import './Chat.scoped.scss';
+// react-icons
 import { IoMdSend } from 'react-icons/io';
-import { VscAccount } from 'react-icons/vsc';
+import { VscAccount, VscOctoface } from 'react-icons/vsc';
 
-import {
-  logStatus,
-  setLogStatus,
-  setLogType
-} from '@/redux/slice/log';
+// state
+import { modalStatus, setModalStatus } from '@/redux/slice/modal';
+import { userStatus, setUserStatus } from '@/redux/slice/member';
+import { logStatus, setLogStatus, setLogType } from '@/redux/slice/log';
+
+// components
+import Modal from '@/components/ui/Modal';
+import Login from '@/components/member/Login';
 
 const _Promise = (payload, resData, delay) => new Promise(resolve => (console.log('%c <=== : payload : ===> \n', 'color: #fdd835', payload), setTimeout(() => resolve(resData), delay)));
 
 function Chat() {
+  const isLogin = ReactRedux.useSelector(userStatus);
   const islogStatus = ReactRedux.useSelector(logStatus);
+  const isModalVisible = ReactRedux.useSelector(modalStatus);
   const dispatch = ReactRedux.useDispatch();
 
   const [messages, setMessages] = React.useState([]);
@@ -139,7 +144,21 @@ function Chat() {
         <div className='title'>
           <h1>TA Bot <span>안녕 - 수고 - 로그(토글)</span></h1>
 
-          <span className='user'><VscAccount /></span>
+          {
+            isLogin
+              ? <span className='user' onClick={() => dispatch(setUserStatus(false))}><VscOctoface /></span>
+              : <span className='user' onClick={() => dispatch(setModalStatus(true))}><VscAccount /></span>
+          }
+
+          {
+            (isModalVisible &&
+              <Modal modalStatus={modalStatus} setModalStatus={status => dispatch(setModalStatus(status))}>
+                <div>
+                  <Login />
+                </div>
+              </Modal>
+            )
+          }
         </div>
 
         <ul className="messageList" ref={messageListRef}>
