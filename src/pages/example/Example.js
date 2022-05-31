@@ -1,4 +1,3 @@
-import './Example.scss';
 import {
   modalStatus,
   setModalStatus
