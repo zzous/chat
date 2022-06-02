@@ -144,7 +144,7 @@ function Chat() {
   React.useEffect(() => {
     const closeLayer = (e) => {
       console.log('clicked', e, layerRef);
-      if (e.path[1] !== layerRef.current && e.path[2] !== layerRef.current) setLayer(false);
+      if (e.path[1] !== layerRef.current && e.path[2] !== layerRef.current && e.path[3] !== layerRef.current) setLayer(false);
     };
     document.body.addEventListener('click', closeLayer);
     return () => document.body.removeEventListener('click', closeLayer);
@@ -156,16 +156,16 @@ function Chat() {
       <div className="chatBox">
         <div className='title'>
           <h1>TA Bot <span>안녕 - 수고 - 로그(토글)</span></h1>
-
-          {
-            isLogin
-              ? <span className='user' ref={layerRef} onClick={() => setLayer(prev => !prev)}><IoIosSettings /></span>
+          <div ref={layerRef}>
+            {
+              isLogin
+                ? <span className='user' onClick={() => setLayer(prev => !prev)}><IoIosSettings /></span>
               // <VscOctoface />
-              : <span className='user' onClick={() => dispatch(setModalStatus(true))}><VscAccount /></span>
-          }
+                : <span className='user' onClick={() => dispatch(setModalStatus(true))}><VscAccount /></span>
+            }
           
-          {
-            (isLogin && isLayer &&
+            {
+              (isLogin && isLayer &&
               <div className='memberSettingslayer'>
                 <a>profile</a>
                 <a onClick={() => {
@@ -176,8 +176,9 @@ function Chat() {
                   Sign out
                 </a>
               </div>
-            )
-          }
+              )
+            }
+          </div>
 
           {
             (isModalVisible &&
