@@ -1,5 +1,5 @@
 // react-icons
-import { IoMdSend } from 'react-icons/io';
+import { IoMdSend, IoIosSettings } from 'react-icons/io';
 import { VscAccount, VscOctoface } from 'react-icons/vsc';
 
 // state
@@ -138,6 +138,19 @@ function Chat() {
     ctrlScrollTop();
   }
 
+  const [isLayer, setLayer] = React.useState(false);
+  const layerRef = React.useRef();
+  
+  React.useEffect(() => {
+    const closeLayer = (e) => {
+      console.log('clicked', e, layerRef);
+      if (e.path[1] !== layerRef.current && e.path[2] !== layerRef.current) setLayer(false);
+    };
+    document.body.addEventListener('click', closeLayer);
+    return () => document.body.removeEventListener('click', closeLayer);
+  }, []);
+
+
   return (
     <>
       <div className="chatBox">
@@ -146,8 +159,24 @@ function Chat() {
 
           {
             isLogin
-              ? <span className='user' onClick={() => dispatch(setUserStatus(false))}><VscOctoface /></span>
+              ? <span className='user' ref={layerRef} onClick={() => setLayer(prev => !prev)}><IoIosSettings /></span>
+              // <VscOctoface />
               : <span className='user' onClick={() => dispatch(setModalStatus(true))}><VscAccount /></span>
+          }
+          
+          {
+            (isLogin && isLayer &&
+              <div className='memberSettingslayer'>
+                <a>profile</a>
+                <a onClick={() => {
+                  setLayer(false);
+                  dispatch(setUserStatus(false));
+                }}
+                >
+                  Sign out
+                </a>
+              </div>
+            )
           }
 
           {
