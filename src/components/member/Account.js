@@ -15,7 +15,6 @@ function Account() {
   
   React.useEffect(() => {
     const closeLayer = (e) => {
-      console.log('clicked', e, layerRef);
       if (e.path[1] !== layerRef.current && e.path[2] !== layerRef.current && e.path[3] !== layerRef.current) setLayer(false);
     };
     document.body.addEventListener('click', closeLayer);
@@ -29,7 +28,7 @@ function Account() {
           ? <span className='user' onClick={() => setLayer(prev => !prev)}><IoIosSettings /></span>
           : <span className='user' onClick={() => dispatch(setModalStatus(true))}><VscAccount /></span>
       }
-          
+
       {
         (isLogin && isLayer &&
           <div className='memberSettingslayer'>

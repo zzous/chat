@@ -9,6 +9,7 @@ import { logStatus, setLogStatus, setLogType } from '@/redux/slice/log';
 import Modal from '@/components/ui/Modal';
 import Login from '@/components/member/Login';
 import Account from '@/components/member/Account';
+import React from 'react';
 
 const _Promise = (payload, resData, delay) => new Promise(resolve => (console.log('%c <=== : payload : ===> \n', 'color: #fdd835', payload), setTimeout(() => resolve(resData), delay)));
 
@@ -34,6 +35,12 @@ function Chat() {
   const textareaRef = React.useRef();
   const messageListRef = React.useRef();
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      greetMessage();
+    }, 1000);
+  }, []);
+  
   /**
    * & ChatForm Change(Send)
    */
@@ -43,6 +50,15 @@ function Chat() {
       sendMessage(chatForm.send);
     }
   }, [chatForm.send]);
+
+  function greetMessage() {
+    const greetData = {
+      type: 'res',
+      txt: 'TABot에 오신걸 환영합니다.',
+      ts: new Date()
+    };
+    receiveMessage(greetData);
+  }
 
   function ctrlTextareaKeyDown(e) {
     e.stopPropagation();
@@ -110,7 +126,7 @@ function Chat() {
       const resData = await _Promise(payload, {
         type: 'res',
         txt: payload.txt.includes('안녕')
-          ? '안녕하세요 :)'
+          ? '안녕하세요. 저는 TABot입니다. :)'
           : payload.txt.includes('수고')
             ? '다음에 또 만나요. :)'
             : [
@@ -124,6 +140,7 @@ function Chat() {
         ts: new Date()
       }, Math.max(300, Math.random() * 1000));
 
+      console.log('## resData', resData);
       receiveMessage(resData);
     } catch (err) {
       console.log('%c <=== : err : ===> \n', 'color: #fdd835', err);
@@ -140,7 +157,7 @@ function Chat() {
     <>
       <div className="chatBox">
         <div className='title'>
-          <h1>TA Bot <span>안녕 - 수고 - 로그(토글)</span></h1>
+          <h1>TABot</h1>
           <Account />
 
           {
