@@ -1,20 +1,18 @@
 // react-icons
-import { IoMdSend, IoIosSettings } from 'react-icons/io';
-import { VscAccount, VscOctoface } from 'react-icons/vsc';
+import { IoMdSend } from 'react-icons/io';
 
 // state
 import { modalStatus, setModalStatus } from '@/redux/slice/modal';
-import { userStatus, setUserStatus } from '@/redux/slice/member';
 import { logStatus, setLogStatus, setLogType } from '@/redux/slice/log';
 
 // components
 import Modal from '@/components/ui/Modal';
 import Login from '@/components/member/Login';
+import Account from '@/components/member/Account';
 
 const _Promise = (payload, resData, delay) => new Promise(resolve => (console.log('%c <=== : payload : ===> \n', 'color: #fdd835', payload), setTimeout(() => resolve(resData), delay)));
 
 function Chat() {
-  const isLogin = ReactRedux.useSelector(userStatus);
   const islogStatus = ReactRedux.useSelector(logStatus);
   const isModalVisible = ReactRedux.useSelector(modalStatus);
   const dispatch = ReactRedux.useDispatch();
@@ -138,47 +136,12 @@ function Chat() {
     ctrlScrollTop();
   }
 
-  const [isLayer, setLayer] = React.useState(false);
-  const layerRef = React.useRef();
-  
-  React.useEffect(() => {
-    const closeLayer = (e) => {
-      console.log('clicked', e, layerRef);
-      if (e.path[1] !== layerRef.current && e.path[2] !== layerRef.current && e.path[3] !== layerRef.current) setLayer(false);
-    };
-    document.body.addEventListener('click', closeLayer);
-    return () => document.body.removeEventListener('click', closeLayer);
-  }, []);
-
-
   return (
     <>
       <div className="chatBox">
         <div className='title'>
           <h1>TA Bot <span>안녕 - 수고 - 로그(토글)</span></h1>
-          <div ref={layerRef}>
-            {
-              isLogin
-                ? <span className='user' onClick={() => setLayer(prev => !prev)}><IoIosSettings /></span>
-              // <VscOctoface />
-                : <span className='user' onClick={() => dispatch(setModalStatus(true))}><VscAccount /></span>
-            }
-          
-            {
-              (isLogin && isLayer &&
-              <div className='memberSettingslayer'>
-                <a>profile</a>
-                <a onClick={() => {
-                  setLayer(false);
-                  dispatch(setUserStatus(false));
-                }}
-                >
-                  Sign out
-                </a>
-              </div>
-              )
-            }
-          </div>
+          <Account />
 
           {
             (isModalVisible &&
