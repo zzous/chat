@@ -15,6 +15,10 @@
 .chatBox .messageList .message.send { transform-origin: right bottom; transform: scale(0); animation: bounce-data 500ms linear both; text-align: right; }
 .chatBox .messageList .message.send .txt { position: relative; color: #fff; text-align: right; background: #387dcd; border-radius: 10px 10px 0 10px; }
 .chatBox .messageList .message.send .txt::before { content: ""; position: absolute; right: 0; bottom: -4px; border-right: none; border-left: 5px solid transparent; border-top: 4px solid #387dcd; }
+.chatBox .messageList .message.send .txt .bookmark { position: absolute; top: 0; left: -12px; color: #666; cursor: pointer; opacity: 0; }
+.chatBox .messageList .message.send .txt:hover .bookmark { opacity: 1; }
+.chatBox .messageList .message.send .txt:hover .bookmark.active { color: #387dcd; }
+.chatBox .messageList .message.send .txt:hover .bookmark:hover { color: #333; }
 .chatBox .ctrl { position: relative; width: 100%; padding: 10px 12px; font-size: 12px; border-top: 1px solid #eee; background: #fff; }
 .chatBox .ctrl .textarea { overflow: hidden; width: calc(100% - 14px); margin: 0 12px 0 0; border-radius: 12px; }
 .chatBox .ctrl .textarea textarea { display: flex; align-items: center; overflow-y: scroll; padding: 4px 12px; border: 0; background: #fff; height: 24px; flex-basis: auto; width: calc(100% + 17px); color: #000; line-height: 16px; resize: none; outline: 0; -webkit-appearance: none; }

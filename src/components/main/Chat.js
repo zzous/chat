@@ -1,9 +1,11 @@
 // react-icons
 import { IoMdSend } from 'react-icons/io';
+import { IoBookmarkOutline } from 'react-icons/io5';
 
 // state
 import { modalStatus, setModalStatus } from '@/redux/slice/modal';
 import { logStatus, setLogStatus, setLogType } from '@/redux/slice/log';
+import { setSaveMessages } from '@/redux/slice/chat';
 
 // components
 import Modal from '@/components/ui/Modal';
@@ -13,7 +15,7 @@ import React from 'react';
 
 const _Promise = (payload, resData, delay) => new Promise(resolve => (console.log('%c <=== : payload : ===> \n', 'color: #fdd835', payload), setTimeout(() => resolve(resData), delay)));
 
-function Chat() {
+function Chat(props) {
   const islogStatus = ReactRedux.useSelector(logStatus);
   const isModalVisible = ReactRedux.useSelector(modalStatus);
   const dispatch = ReactRedux.useDispatch();
@@ -36,10 +38,21 @@ function Chat() {
   const messageListRef = React.useRef();
 
   React.useEffect(() => {
-    setTimeout(() => {
-      greetMessage();
-    }, 1000);
+    setTimeout(() => { greetMessage(); }, 1000);
   }, []);
+  React.useEffect(() => {
+    console.log(props);
+    if (!_.isEmpty(props.clickedMessage)) {
+      setChatForm(chatForm => ({
+        ...chatForm,
+        send: {
+          ...chatForm.send,
+          txt: props.clickedMessage
+        }
+      }));
+    }
+    props.parentClearMessage();
+  }, [props]);
   
   /**
    * & ChatForm Change(Send)
@@ -175,7 +188,15 @@ function Chat() {
           {
             messages.map((message, i) => (
               <li className={`message ${message.type}`} key={`message${i}`}>
-                <p className='txt'>{message.txt}</p>
+                <p className='txt'>
+                  {message.txt}
+                  {
+                    message.type === 'send' &&
+                    <span className='bookmark'>
+                      <IoBookmarkOutline onClick={() => dispatch(setSaveMessages(message.txt))} />
+                    </span>
+                  }
+                </p>
               </li>
             ))
           }
