@@ -8,34 +8,36 @@ export const chatSlice = createSlice({
     messages: []
   },
   reducers: {
+    initMessages: (state, action) => {
+      state.messages = action.payload;
+    },
     setSaveMessages: (state, action) => {
-      console.log('## action', action.payload);
-      // localStorage.setItem('CHAT_SAVED_MESSAGES', action.payload);
+      // console.log('## action', action.payload);
       const _message = {
         date: new Date(),
-        message: action.payload
+        txt: action.payload
       };
-      const isExist = state.messages.filter(d => d.message === action.payload).length > 0 ? true : false;
-      if (isExist) {
-        state.messages = action.payload;
-      }
-      // console.log(state.messages, getSavedMessage());
+      if (action.payload === '안녕' || action.payload === '수고' || action.payload === '로그(토글)') return;
+      const isExist = state.messages.filter(d => d.txt === action.payload).length > 0 ? true : false;
+      if (!isExist) state.messages.push(_message);
+  
+      localStorage.setItem('CHAT_SAVED_MESSAGES', JSON.stringify(state.messages));
+    },
+    deleteMessage: (state, action) => {
+      state.messages.splice(action.payload, 1);
+      localStorage.setItem('CHAT_SAVED_MESSAGES', JSON.stringify(state.messages));
     }
   }
 });
-
-// function getSavedMessage() {
-//   console.log('## get item', localStorage.getItem('CHAT_SAVED_MESSAGES'));
-//   const _message = localStorage.getItem('CHAT_SAVED_MESSAGES');
-//   return _message !== null ? JSON.parse(serialisedState) : undefined;
-// }
 
 // # State
 export const savedMessages = ({ chatSlice }) => chatSlice.messages;
 
 // # Actions
 export const {
-  setSaveMessages
+  initMessages,
+  setSaveMessages,
+  deleteMessage
 } = chatSlice.actions;
 
 // # Reducer
