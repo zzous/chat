@@ -1,10 +1,18 @@
+.account .user .image { position: absolute; top: 0; left: 0; width: 30px; height: 30px; text-align: center; font-size: 21px; line-height: 28px; border-radius: 50%; background: #999; }
+.account .user .email { font-size: 12px; color: #999; }
+.account .user .btnSignOut { position: absolute; top: 50%; right: 0; margin-top: -6px; font-size: 18px; cursor: pointer; opacity: .5; transition-duration: .3s; }
+.account .user .btnSignOut:hover { opacity: 1; }
+.account .user.signIn { padding-left: 40px; }
+.account .user.signOut { cursor: pointer; }
+.account .user.signOut span { display: inline-block; margin-right: 7px; vertical-align: -3px; }
+
 .loginWrap { text-align: center; }
 .loginWrap h1 { padding: 10px 0; font-size: 20px; font-weight: bold; }
 .loginWrap .inp { margin-top: 15px; }
 .loginWrap input { width: 100%; }
-.loginWrap button { width: 100%; margin-top: 15px; color: #fff; border: 1px solid #387dcd; background: #387dcd; }
-.loginWrap button:hover { color: #fff; border: 1px solid #2067b8; background: #2067b8; }
+.loginWrap button[type=button] { width: 100%; margin-top: 15px; color: #fff; border: 1px solid #5e1df6; background: #5e1df6; }
+.loginWrap button:hover { color: #fff; border: 1px solid #4c0be2; background: #4c0be2; }
 
 .memberSettingslayer { position: absolute; top: 50px; right: 12px; padding: 10px 0; font-size: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); border-radius: 5px; background: #fff; }
-.memberSettingslayer a { display: block; padding: 5px 10px; cursor: pointer; transition-duration: .2s; }
-.memberSettingslayer a:hover { color: #fff; background: #2067b8; }
+.memberSettingslayer a { display: block; padding: 5px 10px; cursor: pointer; transition-duration: .3s; }
+.memberSettingslayer a:hover { color: #fff; background: #5e1df6; }

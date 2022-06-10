@@ -1,32 +1,34 @@
-.chatBox { display: flex; flex-direction: column; overflow: hidden; position: relative; min-width: 375px; max-width: 375px; height: 100%; max-height: 100vh; margin: 0 0 0 20px; background: #e5e8eb; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); z-index: 2; }
+.chatBox { display: flex; flex-direction: column; overflow: hidden; position: relative; width: 50%; height: 100%; max-height: 100vh; background: #e5e8eb; border-radius: 12px; z-index: 2; }
 .chatBox .title { position: relative; padding: 20px 12px; color: #333; line-height: 1.4; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background: #fff; z-index: 10; }
-.chatBox .title h1 { margin: 0 2px; padding-right: 20px; font-weight: bold; }
-.chatBox .title h1 span { font-size: 12px; font-weight: normal; }
-.chatBox .title .user { display: inline-block; position: absolute; top: 50%; right: 12px; width: 20px; height: 20px; margin-top: -10px; font-size: 20px; color: #999; cursor: pointer; transition-duration: 0.2s; }
+.chatBox .title h1 { margin: 0 2px; padding-right: 20px; }
+.chatBox .title h1 span { font-size: 13px; font-weight: normal; }
+.chatBox .title .user { display: inline-block; position: absolute; top: 50%; right: 12px; width: 20px; height: 20px; margin-top: -10px; font-size: 20px; color: #999; cursor: pointer; transition-duration: 0.3s; }
 .chatBox .title .user:hover { color: #333; }
 .chatBox .title .user svg { vertical-align: top; }
-.chatBox .messageList { display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; scroll-behavior: smooth; height: calc(100% - 24px); background: #f9f9f9; font-size: 16px; width: 100%; }
-.chatBox .messageList .message { display: inline-block; position: relative; padding: 8px 12px; border-radius: 4px; font-size: 12px; white-space: pre-wrap; }
+.chatBox .messageList { display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; scroll-behavior: smooth; height: calc(100% - 74px); box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.06); background: #f1f1f1; font-size: 16px; width: 100%; }
+.chatBox .messageList .message { display: inline-block; position: relative; padding: 8px 12px; border-radius: 4px; font-size: 13px; white-space: pre-wrap; }
+.chatBox .messageList .message:first-child { margin-top: 20px; }
 .chatBox .messageList .message .txt { display: inline-block; width: auto; padding: 8px 12px; color: inherit; text-align: inherit; line-height: 1.5; box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.08); }
+.chatBox .messageList .message .date { margin-top: 3px; font-size: 11px; color: #999; }
 .chatBox .messageList .message.res { transform-origin: left bottom; transform: scale(0); animation: bounce-data 400ms linear both; text-align: left; }
-.chatBox .messageList .message.res::before { content: ""; display: block; position: absolute; left: 12px; top: 11px; width: 30px; height: 30px; border: 2px solid #ddd; border-radius: 50%; background: url("../../assets/images/gayounge.png") no-repeat center/cover; }
-.chatBox .messageList .message.res .txt { position: relative; margin: 0 0 0 40px; color: #333; text-align: left; background: rgba(240, 240, 240, 0.9); border-radius: 10px; }
-.chatBox .messageList .message.res .txt::before { content: ""; display: block; position: absolute; left: -6px; top: 11px; border-width: 6px 6px 6px 0; border-color: transparent; width: 3px; height: 0; border-style: solid; border-right-color: rgba(240, 240, 240, 0.9); }
+.chatBox .messageList .message.res .txt { position: relative; color: #fff; text-align: left; background: #5e1df6; border-radius: 10px 10px 10px 0; }
+.chatBox .messageList .message.res + .message.res .txt { border-radius: 0 10px 10px 10px; }
 
 .chatBox .messageList .message.send { transform-origin: right bottom; transform: scale(0); animation: bounce-data 400ms linear both; text-align: right; }
-.chatBox .messageList .message.send .txt { position: relative; color: #fff; text-align: right; background: #387dcd; border-radius: 10px 10px 0 10px; }
-.chatBox .messageList .message.send .txt::before { content: ""; position: absolute; right: 0; bottom: -4px; border-right: none; border-left: 5px solid transparent; border-top: 4px solid #387dcd; }
-.chatBox .messageList .message.send .txt .bookmark { position: absolute; top: 0; left: -12px; color: #666; cursor: pointer; opacity: 0; }
+.chatBox .messageList .message.send .txt { position: relative; color: #000; text-align: right; background: #fff; border-radius: 10px 10px 0 10px; }
+.chatBox .messageList .message.send + .message.send .txt { border-radius: 10px 0 10px 10px; }
+.chatBox .messageList .message.send .txt .bookmark { position: absolute; top: -6px; left: -6px; color: #999; cursor: pointer; opacity: 0; transition-duration: .3s; }
 .chatBox .messageList .message.send .txt:hover .bookmark { opacity: 1; }
-.chatBox .messageList .message.send .txt:hover .bookmark.active { color: #387dcd; }
+.chatBox .messageList .message.send .txt:hover .bookmark.active { color: #5e1df6; }
 .chatBox .messageList .message.send .txt:hover .bookmark:hover { color: #333; }
-.chatBox .ctrl { position: relative; width: 100%; padding: 10px 12px; font-size: 12px; border-top: 1px solid #eee; background: #fff; }
+.chatBox .scrollDown { position: absolute; bottom: 90px; right: 8px; font-size: 34px; color: #999; }
+.chatBox .ctrl { display: flex; align-items: center; position: relative; width: 100%; height: 82px; padding: 10px 12px; font-size: 13px; border-top: 1px solid #eee; background: #fff; }
 .chatBox .ctrl .textarea { overflow: hidden; width: calc(100% - 14px); margin: 0 12px 0 0; border-radius: 12px; }
 .chatBox .ctrl .textarea textarea { display: flex; align-items: center; overflow-y: scroll; padding: 4px 12px; border: 0; background: #fff; height: 24px; flex-basis: auto; width: calc(100% + 17px); color: #000; line-height: 16px; resize: none; outline: 0; -webkit-appearance: none; }
 .chatBox .ctrl .textarea textarea:focus::placeholder { color: transparent; }
-.chatBox .ctrl button { position: absolute; top: 50%; right: 10px; width: 30px; height: 30px; margin: -15px 0 0; padding: 0 0 0 3px; color: #ddd; font-size: 20px; text-align: center; vertical-align: middle; font-weight: bold; border: 1px solid transparent; border-radius: 50%; cursor: pointer; background: #fff; transition-duration: 0.2s; }
+.chatBox .ctrl button { position: absolute; top: 50%; right: 10px; width: 30px; height: 30px; margin: -15px 0 0; padding: 0 0 0 3px; color: #ddd; font-size: 20px; text-align: center; vertical-align: middle; font-weight: bold; border: 1px solid transparent; border-radius: 50%; cursor: pointer; color: #fff; background: #5e1df6; transition-duration: 0.3s; }
 .chatBox .ctrl button svg { vertical-align: -2px; }
-.chatBox .ctrl button:hover { color: #fff; background: #387dcd; }
+/* .chatBox .ctrl button:hover { color: #fff; background: #5e1df6; } */
 @keyframes bounce-data {
   0% { transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   4.7% { transform: matrix3d(0.45, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }

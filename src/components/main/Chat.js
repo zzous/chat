@@ -1,23 +1,25 @@
 // react-icons
+import { AiFillDownCircle, AiFillHeart } from 'react-icons/ai';
 import { IoMdSend } from 'react-icons/io';
 import { IoBookmarkOutline } from 'react-icons/io5';
 
 // state
 import { modalStatus, setModalStatus } from '@/redux/slice/modal';
 import { logStatus, setLogStatus, setLogType } from '@/redux/slice/log';
-import { setSaveMessages } from '@/redux/slice/chat';
+import { setSaveMessages, autoMessageState } from '@/redux/slice/chat';
 
 // components
 import Modal from '@/components/ui/Modal';
 import Login from '@/components/member/Login';
-import Account from '@/components/member/Account';
 import React from 'react';
+import _ from 'lodash';
 
 const _Promise = (payload, resData, delay) => new Promise(resolve => (console.log('%c <=== : payload : ===> \n', 'color: #fdd835', payload), setTimeout(() => resolve(resData), delay)));
 
-function Chat(props) {
+function Chat() {
   const islogStatus = ReactRedux.useSelector(logStatus);
   const isModalVisible = ReactRedux.useSelector(modalStatus);
+  const autoMessage = ReactRedux.useSelector(autoMessageState);
   const dispatch = ReactRedux.useDispatch();
 
   const [messages, setMessages] = React.useState([]);
@@ -25,34 +27,34 @@ function Chat(props) {
     res: {
       type: 'res',
       txt: null,
-      ts: new Date()
+      ts: moment().format('YYYY.MM.DD hh:mm:ss')
     },
     send: {
       type: 'send',
       txt: null,
-      ts: new Date()
+      ts: moment().format('YYYY.MM.DD hh:mm:ss')
     }
   });
 
   const textareaRef = React.useRef();
   const messageListRef = React.useRef();
-
+  
   React.useEffect(() => {
     setTimeout(() => { greetMessage(); }, 1000);
   }, []);
   React.useEffect(() => {
-    console.log(props);
-    if (!_.isEmpty(props.clickedMessage)) {
+    console.log(autoMessage);
+    if (autoMessage) {
       setChatForm(chatForm => ({
         ...chatForm,
         send: {
           ...chatForm.send,
-          txt: props.clickedMessage
+          txt: autoMessage.txt,
+          ts: moment().format('YYYY.MM.DD hh:mm:ss')
         }
       }));
     }
-    props.parentClearMessage();
-  }, [props]);
+  }, [autoMessage]);
   
   /**
    * & ChatForm Change(Send)
@@ -68,7 +70,7 @@ function Chat(props) {
     const greetData = {
       type: 'res',
       txt: 'TABot에 오신걸 환영합니다.',
-      ts: new Date()
+      ts: moment().format('YYYY.MM.DD hh:mm:ss')
     };
     receiveMessage(greetData);
   }
@@ -91,7 +93,8 @@ function Chat(props) {
         ...chatForm,
         send: {
           ...chatForm.send,
-          txt: message
+          txt: message,
+          ts: moment().format('YYYY.MM.DD hh:mm:ss')
         }
       }));
     } else {
@@ -122,16 +125,24 @@ function Chat(props) {
       ...chatForm,
       send: {
         ...chatForm.send,
-        txt: message
+        txt: message,
+        ts: moment().format('YYYY.MM.DD hh:mm:ss')
       }
     }));
   }
 
   async function sendMessage(payload) {
     try {
-      if (payload.txt.includes('로그')) {
+      if (payload.txt.includes('실행')) {
         dispatch(setLogStatus(!islogStatus));
         dispatch(setLogType(Math.random() * 2000));
+
+        return;
+      }
+      if (payload.txt.includes('clear')) {
+        setTimeout(() => {
+          setMessages(messages => []);
+        }, 500);
 
         return;
       }
@@ -150,7 +161,7 @@ function Chat(props) {
               '학습 완료!!!',
               'Error: ca1b.00=.e1-d=_2./,13zq1,dfodfed,,a.flj9o109uvjlk9fn,ai9fdf d sa'
             ][parseInt(Math.random() * 6, 10)],
-        ts: new Date()
+        ts: moment().format('YYYY.MM.DD hh:mm:ss')
       }, Math.max(300, Math.random() * 1000));
 
       console.log('## resData', resData);
@@ -171,7 +182,6 @@ function Chat(props) {
       <div className="chatBox">
         <div className='title'>
           <h1>TABot</h1>
-          <Account />
 
           {
             (isModalVisible &&
@@ -193,18 +203,21 @@ function Chat(props) {
                   {
                     message.type === 'send' &&
                     <span className='bookmark'>
-                      <IoBookmarkOutline onClick={() => dispatch(setSaveMessages(message.txt))} />
+                      <AiFillHeart onClick={() => dispatch(setSaveMessages(message.txt))} />
                     </span>
                   }
                 </p>
+                {/* <p className='date'>{message.ts}</p> */}
               </li>
             ))
           }
         </ul>
 
+        {/* <div className='scrollDown'><AiFillDownCircle /></div> */}
+
         <div className='ctrl'>
           <div className='textarea'>
-            <textarea ref={textareaRef} onKeyDown={_.debounce(ctrlTextareaKeyDown, 10)} placeholder="Type message..." />
+            <textarea ref={textareaRef} onKeyDown={_.debounce(ctrlTextareaKeyDown, 10)} placeholder="Enter your message..." />
           </div>
           <button onClick={ctrlSendButton}><IoMdSend /></button>
         </div>

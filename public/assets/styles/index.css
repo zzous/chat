@@ -1,11 +1,51 @@
 @import 'reset.css';
-@import 'common.css';
 @import 'chat.css';
 @import 'log.css';
 @import 'main.css';
+@import 'history.css';
 @import 'modal.css';
 @import 'member.css';
 
 #root,
 #wrap,
-#contents { overflow: hidden; height: 100%; }
+#contents { overflow: hidden; height: 100%; line-height: 1em; }
+#contents { padding: 10px 10px 10px 260px; }
+#contents .contInner { display: flex; justify-content: flex-end; position: relative; overflow: hidden; height: 100%; border-radius: 10px; background: #fff; }
+#contents .contInner > div { width: 50%; }
+#contents .contInner .pageTitle { position: relative; font-size: 20px; color: #333; }
+
+/* layout */
+body { background: #1a1c1e; }
+#header { position: fixed; top: 0; left: 0; width: 250px; height: 100%; padding: 50px 10px 20px; color: #fff; }
+  #header .logo span { display: inline-block; margin: 0 4px 0 15px; vertical-align: -5px; font-size: 19px; }
+  #header .nav { margin-top: 70px; color: #aaa; }
+  #header .nav li { padding: 10px 15px; margin-top: 5px; font-size: 14px; border-radius: 4px; cursor: pointer; }
+  #header .nav li span { display: inline-block; margin-right: 10px; vertical-align: -4px; font-size: 18px; }
+  #header .nav li:hover { color: #fff; background: #454a58; transition-duration: .3s; }
+  #header .account { position: absolute; bottom: 30px; left: 25px; width: 220px; }
+#footer { position: fixed; left: 0; bottom: 0; right: 0; width: 100%; }
+
+/* link */
+.navLink,
+.link { display: inline-block; margin: 0 12px; color: #5e1df6; font-size: 18px; }
+.navLink.active,
+.link.active { color: #5e1df6; text-shadow: 0 0 0 #5e1df6; }
+
+/* button */
+button[type=button] { border: 1px solid #aaa; border-radius: 3px; font-size: 14px; cursor: pointer; background: transparent; }
+button[type=button]:disabled { color: #ccc; cursor: not-allowed; }
+button[type=button].success { color: #5e1df6; }
+button[type=button].danger { color: #ca1a1a; }
+
+/* input */
+input, textarea, select, button { padding: 5px 12px; color: #3c3e44; line-height: 1.5; letter-spacing: 0; vertical-align: middle; font-size: 14px; box-shadow: none; border: 1px solid #aaa; border-radius: 3px; background: transparent; transition-duration: .3s; }
+input::placeholder { color: #aaa; }
+
+/* spinner */
+.spinner { display: block; position: absolute; left: 0; top: 0; z-index: 1; padding: 20px; }
+.spinner > div { position: relative; top: -10px; width: 8px; height: 8px; border-radius: 5px; background-color: #fff; color: #fff; transform-origin: 5px 15px; animation: spin 2s infinite linear; }
+.spinner > div:before,
+.spinner > div:after { content: ''; display: inline-block; position: absolute; }
+.spinner > div:before { left: -8.66254px; top: 15px; width: 8px; height: 8px; border-radius: 5px; background-color: #fff; color: #fff; }
+.spinner > div:after { left: 8.66254px; top: 15px; width: 8px; height: 8px; border-radius: 5px; background-color: #fff; color: #fff; }
+

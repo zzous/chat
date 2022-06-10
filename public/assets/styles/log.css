@@ -1,5 +1,6 @@
-.logBox { flex: 1 1; overflow: hidden; position: relative; z-index: 2; height: 100%; border-radius: 12px; }
-.logBox ul { overflow: auto; position: relative; height: inherit; padding: 30px 0; background: #000; }
+.innerWrap.log { background: #000; }
+.logBox { flex: 1 1; overflow: hidden; position: relative; z-index: 2; height: 100%; }
+.logBox ul { overflow: auto; overflow-x: hidden; position: relative; height: inherit; padding: 30px 0; background: #000; }
 .logBox ul li { display: flex; position: relative; color: #fff; font-size: 12px; line-height: 20px; padding: 0 0 0 60px; }
 .logBox ul li:before { content: attr(data-line-number); display: inline-block; position: absolute; left: 0; top: 0; min-width: 60px; padding: 0 8px 0 0; cursor: pointer; border-right: 1px solid #ccc; text-align: right; }
 .logBox ul li .ts { flex: 0 0 auto; min-width: 15%; padding: 0 4px 0 24px; margin-right: 12px; }

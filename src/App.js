@@ -3,7 +3,6 @@ import routes from '@/routes';
 
 function App() {
   let RWS = useRoutes(routes);
-
   return <>{ RWS }</>;
 }
 

@@ -1,5 +1,5 @@
 // react-icons
-import { IoIosSettings } from 'react-icons/io';
+import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 import { VscAccount } from 'react-icons/vsc';
 
 // state
@@ -21,12 +21,34 @@ function Account() {
     return () => document.body.removeEventListener('click', closeLayer);
   }, []);
 
+  const user = {
+    name: 'User name',
+    email: 'testmaker@strato.co.kr',
+    imageSrc: null
+  };
+
   return (
-    <div ref={layerRef}>
+    <div ref={layerRef} className='account'>
       {
-        isLogin
-          ? <span className='user' onClick={() => setLayer(prev => !prev)}><IoIosSettings /></span>
-          : <span className='user' onClick={() => dispatch(setModalStatus(true))}><VscAccount /></span>
+        isLogin ?
+          <div className='user signIn'>
+            <div className='image'>
+              {
+                user.imageSrc
+                  ? <img src={user.imageSrc} />
+                  : user.name.split('')[0]
+              }
+            </div>
+            <div className='name'>{user.name}</div>
+            <div className='email'>{user.email}</div>
+            <div className='btnSignOut'>
+              <AiOutlineLogout onClick={() => {
+                setLayer(false);
+                dispatch(setUserStatus(false));
+              }}/>
+            </div>
+          </div>
+          : <span className='user signOut' onClick={() => dispatch(setModalStatus(true))}><span><AiOutlineLogin /></span>Sign In</span>
       }
 
       {

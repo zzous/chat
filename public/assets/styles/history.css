@@ -1,0 +1,6 @@
+.history .infoBox { padding: 20px; }
+.history .infoBox .title { margin-top: 50px; }
+.history .exampleList { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 10px; }
+.history .exampleList li { position: relative; width: 49%; padding: 10px 30px 35px 10px; border: 1px solid #ddd; border-radius: 3px; }
+.history .exampleList li .date { position: absolute; bottom: 10px; left: 10px; font-size: 11px; color: #999; }
+.history .exampleList li .delete { position: absolute; top: 50%; right: 8px; margin-top: -6px; }
